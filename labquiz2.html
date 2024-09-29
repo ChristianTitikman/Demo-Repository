@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ionic Loan Eligibility Checker</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.esm.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@latest/css/ionic.bundle.css"/>
+  
+</head>
+<body>
+
+  <ion-app>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Loan Eligibility</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <ion-item>
+        <ion-label position="floating">Monthly Income</ion-label><br>
+        <ion-input id="income" type="number" placeholder="Enter your income"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Loan Type</ion-label>
+        <ion-select id="loanType" placeholder="Select Loan Type">
+          <ion-select-option value="Personal">Personal Loan</ion-select-option>
+          <ion-select-option value="Home">Home Loan</ion-select-option>
+          <ion-select-option value="Auto">Auto Loan</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Existing Debts</ion-label>
+        <ion-checkbox id="debts"></ion-checkbox>
+      </ion-item>
+
+      <ion-button expand="block" onclick="checkEligibility()">Check Eligibility</ion-button>
+
+      <ion-textarea readonly id="result" placeholder="Your eligibility result will appear here..."></ion-textarea>
+
+    </ion-content>
+  </ion-app>
+
+  <script>
+    function checkEligibility() {
+        let income = document.getElementById('income').value;
+        let loanType = document.getElementById('loanType').value;
+        let debts = document.getElementById('debts');
+        let resulta = document.getElementById('result');
+        amount = 0;
+
+        if(loanType == "Personal"){
+            amount = income * 10;
+        }if(loanType == "Home"){
+            amount = income * 20;
+        }if(loanType == "Auto"){
+            amount = income * 30;
+        }
+
+        if(debts.checked){
+            amount = income * 0.7;
+        }
+        
+        resulta.innerHTML = "You are eligible to :" + amount.toFixed(2);
+    }
+
+  </script>
+
+</body>
+</html>
